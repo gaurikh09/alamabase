@@ -2,84 +2,83 @@
 {% block extra_css %}
 <style>
     .question-card { 
-        background: white; 
+        background: #1E293B; 
         border-radius: 16px; 
-        padding: 2rem; 
-        margin-bottom: 1.5rem; 
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08); 
-        border-left: 4px solid #667eea; 
+        padding: 24px; 
+        margin-bottom: 24px; 
+        border: 1px solid rgba(236, 72, 153, 0.2); 
         transition: all 0.3s; 
     }
     .question-card:hover { 
-        box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
-        transform: translateY(-2px); 
+        box-shadow: 0 12px 32px rgba(236, 72, 153, 0.2); 
+        transform: translateY(-4px); 
     }
     .question-text { 
         font-weight: 700; 
         font-size: 1.15rem; 
-        margin-bottom: 1.5rem; 
-        color: #1e293b; 
+        margin-bottom: 24px; 
+        color: #F9FAFB; 
         line-height: 1.6;
     }
     .answer-text { 
-        margin-bottom: 1.5rem; 
+        margin-bottom: 24px; 
         line-height: 1.8; 
-        color: #475569; 
-        background: #f8fafc;
-        padding: 1.25rem;
+        color: #CBD5E1; 
+        background: #111827;
+        padding: 20px;
         border-radius: 12px;
     }
     .citations { 
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
-        padding: 1.25rem; 
+        background: rgba(236, 72, 153, 0.05); 
+        padding: 20px; 
         border-radius: 12px; 
-        margin: 1.5rem 0;
-        border-left: 3px solid #667eea;
+        margin: 24px 0;
+        border-left: 3px solid #EC4899;
     }
     .citations ul { 
-        margin: 0.75rem 0 0 1.5rem; 
+        margin: 12px 0 0 24px; 
     }
     .citations li { 
-        margin-bottom: 0.5rem; 
-        color: #64748b; 
+        margin-bottom: 8px; 
+        color: #CBD5E1; 
         line-height: 1.6;
     }
     .confidence { 
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem; 
-        border-radius: 20px; 
+        gap: 8px;
+        padding: 10px 20px; 
+        border-radius: 24px; 
         font-size: 0.9rem; 
-        font-weight: 600; 
+        font-weight: 700; 
     }
     .confidence-high { 
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%); 
         color: white; 
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
     }
     .confidence-medium { 
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); 
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); 
         color: white; 
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
     }
     .confidence-low { 
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+        background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); 
         color: white; 
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
     }
     .coverage-summary { 
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+        background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%); 
         color: white; 
-        padding: 2.5rem; 
+        padding: 40px; 
         border-radius: 16px; 
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        margin-bottom: 32px;
+        box-shadow: 0 12px 32px rgba(236, 72, 153, 0.4);
     }
     .coverage-stats { 
         display: flex; 
-        gap: 3rem; 
-        margin-top: 1.5rem; 
+        gap: 48px; 
+        margin-top: 24px; 
         justify-content: center; 
         flex-wrap: wrap; 
     }
@@ -92,41 +91,43 @@
     }
     .stat-label { 
         opacity: 0.95; 
-        margin-top: 0.5rem; 
+        margin-top: 8px; 
         font-size: 0.95rem; 
     }
     textarea { 
         min-height: 120px; 
         width: 100%; 
-        padding: 1rem; 
-        border: 2px solid #e5e7eb; 
+        padding: 16px; 
+        background: #111827;
+        border: 2px solid rgba(236, 72, 153, 0.2); 
         border-radius: 12px; 
         font-size: 1rem;
         font-family: 'Inter', sans-serif;
         line-height: 1.6;
+        color: #F9FAFB;
     }
     textarea:focus {
         outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        border-color: #EC4899;
+        box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
     }
     .action-buttons {
         display: flex;
-        gap: 0.75rem;
+        gap: 12px;
         flex-wrap: wrap;
-        margin-top: 1.5rem;
+        margin-top: 24px;
     }
 </style>
 {% endblock %}
 {% block page_title %}Review Answers{% endblock %}
 {% block content %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
     <div>
-        <h2 style="font-size: 2rem; font-weight: 800; color: #1e293b; margin-bottom: 0.25rem;">{{ questionnaire.title }}</h2>
-        <p style="color: #64748b;"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>{{ questionnaire.uploaded_at|date:"F d, Y" }}</p>
+        <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 8px;">{{ questionnaire.title }}</h2>
+        <p style="color: #CBD5E1;"><i class="fas fa-calendar" style="margin-right: 8px;"></i>{{ questionnaire.uploaded_at|date:"F d, Y" }}</p>
     </div>
-    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a href="{% url 'export_questionnaire' questionnaire.pk %}" class="btn btn-success">
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="{% url 'export_questionnaire' questionnaire.pk %}" class="btn">
             <i class="fas fa-download"></i> Export
         </a>
         <a href="{% url 'dashboard' %}" class="btn btn-secondary">
@@ -174,23 +175,23 @@
 {% for question in questions %}
 <div class="question-card">
     <div class="question-text">
-        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 8px; font-size: 0.9rem; margin-right: 0.75rem;">Q{{ question.order }}</span>
+        <span style="background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%); color: white; padding: 6px 16px; border-radius: 8px; font-size: 0.9rem; margin-right: 12px;">Q{{ question.order }}</span>
         {{ question.text }}
     </div>
     
     {% if question.answer %}
     <div class="answer-text" id="answer-text-{{ question.answer.pk }}">
-        <strong style="color: #667eea; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <strong style="color: #EC4899; display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
             <i class="fas fa-comment-dots"></i> Answer:
         </strong>
-        <div style="color: #1e293b;">{{ question.answer.text }}</div>
+        <div style="color: #F9FAFB;">{{ question.answer.text }}</div>
     </div>
     
     <textarea id="answer-edit-{{ question.answer.pk }}" style="display: none;">{{ question.answer.text }}</textarea>
     
     {% if question.answer.citations %}
     <div class="citations">
-        <strong style="color: #1e293b; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <strong style="color: #F9FAFB; display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
             <i class="fas fa-book"></i> Citations:
         </strong>
         <ul>

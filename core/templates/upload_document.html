@@ -39,7 +39,7 @@
         <div class="form-group">
             <label><i class="fas fa-file" style="margin-right: 8px;"></i>File</label>
             <div class="upload-area" id="uploadArea">
-                <input type="file" name="file" id="fileInput" accept=".pdf,.docx,.txt,.xlsx" required style="display: none;">
+                <input type="file" name="file" id="fileInput" accept=".pdf,.docx,.txt,.xlsx" multiple required style="display: none;">
                 <div id="uploadPrompt">
                     <div style="font-size: 3rem; margin-bottom: 16px; color: #EC4899;">📁</div>
                     <p style="font-size: 1.1rem; font-weight: 600; color: #F9FAFB; margin-bottom: 8px;">Drop your file here or click to browse</p>
@@ -102,8 +102,17 @@ fileInput.addEventListener('change', (e) => {
 function displayFileInfo(file) {
     uploadPrompt.style.display = 'none';
     fileInfo.style.display = 'block';
-    fileName.textContent = file.name;
-    fileSize.textContent = formatFileSize(file.size);
+    if (fileInput.files.length > 1) {
+        fileName.textContent = fileInput.files.length + ' files selected';
+        let totalSize = 0;
+        for (let i = 0; i < fileInput.files.length; i++) {
+            totalSize += fileInput.files[i].size;
+        }
+        fileSize.textContent = formatFileSize(totalSize);
+    } else {
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+    }
 }
 
 function formatFileSize(bytes) {

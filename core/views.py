@@ -53,12 +53,15 @@ def dashboard_view(request):
 def upload_document_view(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        file = request.FILES.get('file')
-        doc = ReferenceDocument.objects.create(user=request.user, title=title, file=file)
+        files = request.FILES.getlist('file')
         ai_service = AIService()
-        doc.content = ai_service.extract_text_from_file(doc.file.path)
-        doc.save()
-        messages.success(request, 'Reference document uploaded!')
+        
+        for file in files:
+            doc = ReferenceDocument.objects.create(user=request.user, title=f"{title} - {file.name}", file=file)
+            doc.content = ai_service.extract_text_from_file(doc.file.path)
+            doc.save()
+        
+        messages.success(request, f'{len(files)} reference document(s) uploaded!')
         return redirect('dashboard')
     return render(request, 'upload_document.html')
 
