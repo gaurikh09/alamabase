@@ -8,195 +8,303 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: #0F172A; color: #F9FAFB; }
         
-        .hero { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; 
-            padding: 6rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
+        /* Navbar */
+        .navbar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
-            opacity: 0.3;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.1);
         }
-        .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800; animation: fadeInUp 0.8s; }
-        .hero p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.95; animation: fadeInUp 0.8s 0.2s both; }
-        .hero .cta { 
-            display: inline-flex;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem; 
-            background: white;
-            color: #667eea; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-size: 1.1rem; 
-            font-weight: 700;
-            margin: 0.5rem; 
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            animation: fadeInUp 0.8s 0.4s both;
         }
-        .hero .cta:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
-        .hero .cta-secondary { background: transparent; border: 2px solid white; color: white; }
-        .hero .cta-secondary:hover { background: rgba(255,255,255,0.1); }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .features { padding: 5rem 2rem; background: white; }
-        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #0f172a; font-weight: 800; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .feature { 
-            padding: 2.5rem; 
-            text-align: center; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 16px;
-            transition: all 0.3s;
-            background: white;
-        }
-        .feature:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-        }
-        .feature-icon { 
-            font-size: 3.5rem; 
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
-        .feature h3 { font-size: 1.35rem; margin-bottom: 1rem; color: #0f172a; font-weight: 700; }
-        .feature p { color: #64748b; line-height: 1.7; }
-        
-        .company { 
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
-            padding: 5rem 2rem; 
-            text-align: center; 
+        .nav-links a {
+            color: #CBD5E1;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.2s;
         }
-        .company h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: #0f172a; font-weight: 800; }
-        .company p { font-size: 1.1rem; color: #475569; max-width: 800px; margin: 0 auto 1rem; line-height: 1.7; }
-        .stats { display: flex; justify-content: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap; }
-        .stat { 
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 16px;
-            min-width: 180px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .nav-links a:hover { color: #EC4899; }
+        .nav-buttons a {
+            padding: 10px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-left: 12px;
+            font-weight: 600;
             transition: all 0.3s;
         }
-        .stat:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .stat-value { 
-            font-size: 3.5rem; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .btn-login {
+            color: #EC4899;
+            border: 2px solid #EC4899;
         }
-        .stat-label { color: #64748b; margin-top: 0.75rem; font-weight: 600; }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 5rem 2rem;
-            text-align: center;
+        .btn-login:hover {
+            background: rgba(236, 72, 153, 0.1);
+        }
+        .btn-signup {
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
             color: white;
         }
-        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; }
-        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .btn-signup:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 32px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #CBD5E1;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-buttons a {
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .hero-primary {
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
+            color: white;
+        }
+        .hero-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(236, 72, 153, 0.4);
+        }
+        .hero-secondary {
+            border: 2px solid #EC4899;
+            color: #EC4899;
+        }
+        .hero-secondary:hover {
+            background: rgba(236, 72, 153, 0.1);
+        }
+        
+        /* Stats */
+        .stats {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .stat-card {
+            background: #1E293B;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.2);
+        }
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            color: #CBD5E1;
+            margin-top: 8px;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 32px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        .step-card {
+            background: #1E293B;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            transition: all 0.3s;
+        }
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.2);
+        }
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #EC4899;
+        }
+        .step-card p {
+            color: #CBD5E1;
+            line-height: 1.6;
+        }
+        
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
+            padding: 80px 32px;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        .cta-section a {
+            padding: 16px 48px;
+            background: white;
+            color: #EC4899;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .cta-section a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .features h2, .company h2, .cta-section h2 { font-size: 2rem; }
-            .stats { gap: 2rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🛡️ ShieldGuard</div>
+            <div class="nav-links">
+                <a href="#product">Product</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#security">Security</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="{% url 'login' %}" class="btn-login">Login</a>
+                <a href="{% url 'signup' %}" class="btn-signup">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="hero">
-        <div class="hero-content">
-            <h1>🛡️ ShieldGuard</h1>
-            <p>AI-Powered Questionnaire Automation for Enterprise Security</p>
-            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">Automate security assessments, compliance forms, and vendor questionnaires with AI-powered answers backed by your documentation.</p>
-            <div>
-                <a href="{% url 'signup' %}" class="cta">
-                    <i class="fas fa-rocket"></i> Get Started Free
-                </a>
-                <a href="{% url 'login' %}" class="cta cta-secondary">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
-                </a>
-            </div>
+        <h1>🛡️ ShieldGuard</h1>
+        <p>AI-Powered Questionnaire Automation for Enterprise Security. Automate security assessments, compliance forms, and vendor questionnaires with AI-powered answers backed by your documentation.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'signup' %}" class="hero-primary"><i class="fas fa-rocket"></i> Get Started Free</a>
+            <a href="#how-it-works" class="hero-secondary"><i class="fas fa-play-circle"></i> See How It Works</a>
         </div>
     </div>
 
-    <div class="company">
-        <h2>About ShieldGuard</h2>
-        <p><strong>Industry:</strong> SaaS Cybersecurity Platform</p>
-        <p>ShieldGuard Inc. is a leading SaaS cybersecurity platform that provides real-time threat detection, vulnerability management, and compliance monitoring for enterprise clients. Founded in 2019, we serve over 500 organizations globally.</p>
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">500+</div>
-                <div class="stat-label">Enterprise Clients</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">99.9%</div>
-                <div class="stat-label">Uptime SLA</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">24/7</div>
-                <div class="stat-label">Security Monitoring</div>
-            </div>
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Organizations</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">SOC2</div>
+            <div class="stat-label">Security</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Monitoring</div>
         </div>
     </div>
 
-    <div class="features">
-        <h2>How It Works</h2>
-        <div class="feature-grid">
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-file-upload"></i></div>
-                <h3>Upload Questionnaire</h3>
-                <p>Upload security assessments, compliance forms, or vendor questionnaires in PDF, DOCX, or TXT format.</p>
+    <div class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-file-upload" style="color: #EC4899;"></i></div>
+                <h3>1. Upload Questionnaire</h3>
+                <p>Upload your security assessment or compliance form in PDF, DOCX, or TXT format.</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-book"></i></div>
-                <h3>Add References</h3>
-                <p>Upload your company's security policies, compliance documents, and internal documentation.</p>
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-book" style="color: #A855F7;"></i></div>
+                <h3>2. Add References</h3>
+                <p>Upload your company's security policies and documentation.</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                <h3>AI Generation</h3>
-                <p>Our AI analyzes your documents and generates accurate answers with proper citations and confidence scores.</p>
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-robot" style="color: #EC4899;"></i></div>
+                <h3>3. AI Generates</h3>
+                <p>Our AI analyzes documents and generates accurate answers with citations.</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-edit"></i></div>
-                <h3>Review & Edit</h3>
-                <p>Review all answers, edit as needed, and regenerate specific responses for perfect accuracy.</p>
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-edit" style="color: #A855F7;"></i></div>
+                <h3>4. Review & Edit</h3>
+                <p>Review answers, edit as needed, and regenerate specific responses.</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-download"></i></div>
-                <h3>Export Document</h3>
-                <p>Download completed questionnaires as formatted Word documents with all citations preserved.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Secure & Private</h3>
-                <p>Your data is encrypted, isolated, and never shared. Full compliance with security standards.</p>
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-download" style="color: #EC4899;"></i></div>
+                <h3>5. Export</h3>
+                <p>Download completed questionnaires as formatted Word documents.</p>
             </div>
         </div>
     </div>
@@ -204,9 +312,7 @@
     <div class="cta-section">
         <h2>Ready to Automate Your Questionnaires?</h2>
         <p>Join 500+ enterprises using ShieldGuard</p>
-        <a href="{% url 'signup' %}" class="cta">
-            <i class="fas fa-rocket"></i> Start Free Trial
-        </a>
+        <a href="{% url 'signup' %}"><i class="fas fa-rocket"></i> Start Free Trial</a>
     </div>
 </body>
 </html>

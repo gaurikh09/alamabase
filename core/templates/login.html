@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0F172A;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -17,61 +17,91 @@
             padding: 2rem;
         }
         .card {
-            background: white;
-            border-radius: 16px;
-            padding: 2.5rem;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 24px;
+            padding: 48px;
             max-width: 450px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.3);
         }
-        .logo { font-size: 3rem; text-align: center; margin-bottom: 0.5rem; }
-        h2 { text-align: center; color: #1e293b; margin-bottom: 0.5rem; font-size: 1.75rem; }
-        .subtitle { text-align: center; color: #64748b; margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; font-size: 0.9rem; }
+        .logo { 
+            font-size: 3rem; 
+            text-align: center; 
+            margin-bottom: 16px;
+        }
+        h2 { 
+            text-align: center; 
+            color: #F9FAFB; 
+            margin-bottom: 8px; 
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .subtitle { 
+            text-align: center; 
+            color: #CBD5E1; 
+            margin-bottom: 32px; 
+        }
+        .form-group { margin-bottom: 24px; }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            color: #F9FAFB;
+        }
         input {
             width: 100%;
-            padding: 0.875rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            padding: 14px 16px;
+            background: #111827;
+            border: 2px solid rgba(236, 72, 153, 0.2);
+            border-radius: 12px;
+            color: #F9FAFB;
             font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
         }
         input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            border-color: #EC4899;
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
         }
         .btn {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 14px;
+            background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 0.5rem;
+            transition: all 0.3s;
         }
-        .btn:hover { opacity: 0.9; }
+        .btn:hover { 
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+        }
         .alert {
-            padding: 1rem;
-            background: #fee2e2;
-            color: #991b1b;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #ef4444;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #EF4444;
         }
         .footer {
             text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-            color: #64748b;
-            font-size: 0.9rem;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(236, 72, 153, 0.1);
+            color: #CBD5E1;
         }
-        .footer a { color: #667eea; font-weight: 600; text-decoration: none; }
+        .footer a { 
+            color: #EC4899; 
+            font-weight: 600; 
+            text-decoration: none; 
+        }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
