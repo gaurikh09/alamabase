@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShieldGuard - AI-Powered Questionnaire Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+        .cta { display: inline-block; padding: 1rem 3rem; background: white; color: #667eea; text-decoration: none; border-radius: 50px; font-size: 1.2rem; font-weight: 600; margin: 0.5rem; transition: transform 0.3s; }
+        .cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .cta-secondary { background: transparent; border: 2px solid white; color: white; }
+        .features { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #667eea; }
+        .feature p { color: #666; line-height: 1.6; }
+        .company { background: #f8f9fa; padding: 4rem 2rem; text-align: center; }
+        .company h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #2c3e50; }
+        .company p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8; }
+        .stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 3rem; font-weight: bold; color: #667eea; }
+        .stat-label { color: #666; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🛡️ ShieldGuard Inc.</h1>
+        <p>AI-Powered Questionnaire Automation for Enterprise Security</p>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem;">Automate security assessments, compliance forms, and vendor questionnaires with AI-powered answers backed by your documentation.</p>
+        <div>
+            <a href="{% url 'signup' %}" class="cta">Get Started Free</a>
+            <a href="{% url 'login' %}" class="cta cta-secondary">Sign In</a>
+        </div>
+    </div>
+
+    <div class="company">
+        <h2>About ShieldGuard</h2>
+        <p><strong>Industry:</strong> SaaS Cybersecurity Platform</p>
+        <p>ShieldGuard Inc. is a leading SaaS cybersecurity platform that provides real-time threat detection, vulnerability management, and compliance monitoring for enterprise clients. Founded in 2019, we serve over 500 organizations globally with advanced security solutions.</p>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">500+</div>
+                <div class="stat-label">Enterprise Clients</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">99.9%</div>
+                <div class="stat-label">Uptime SLA</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Security Monitoring</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <h2>How It Works</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <h3>Upload Questionnaire</h3>
+                <p>Upload security assessments, compliance forms, or vendor questionnaires in PDF, DOCX, or TXT format.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📚</div>
+                <h3>Add References</h3>
+                <p>Upload your company's security policies, compliance documents, and internal documentation.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Generation</h3>
+                <p>Our AI analyzes your documents and generates accurate answers with proper citations and confidence scores.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✏️</div>
+                <h3>Review & Edit</h3>
+                <p>Review all answers, edit as needed, and regenerate specific responses for perfect accuracy.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📥</div>
+                <h3>Export Document</h3>
+                <p>Download completed questionnaires as formatted Word documents with all citations preserved.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Your data is encrypted, isolated, and never shared. Full compliance with security standards.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero" style="min-height: auto; padding: 3rem 2rem;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Automate Your Questionnaires?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Join 500+ enterprises using ShieldGuard for security automation</p>
+        <a href="{% url 'signup' %}" class="cta">Start Free Trial</a>
+    </div>
+</body>
+</html>

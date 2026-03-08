@@ -1,0 +1,25 @@
+Security Assessment Questionnaire - ShieldGuard Inc.
+
+1. What encryption standards does your company use for data at rest and in transit?
+
+2. How does your organization handle security incident response and what is the typical response time?
+
+3. What employee security training programs are in place?
+
+4. Describe your data backup and disaster recovery procedures.
+
+5. What third-party security certifications does your company hold?
+
+6. How do you manage access control and user authentication?
+
+7. What is your policy on data retention and deletion?
+
+8. How do you ensure compliance with GDPR and other data protection regulations?
+
+9. What penetration testing and vulnerability assessment procedures do you follow?
+
+10. How is customer data segregated and protected in your systems?
+
+11. What are your business continuity plans in case of a major outage?
+
+12. How do you monitor and log security events in your infrastructure?

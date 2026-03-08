@@ -1,0 +1,28 @@
+ShieldGuard Inc. - Compliance and Certifications
+
+Regulatory Compliance:
+ShieldGuard is fully compliant with GDPR (General Data Protection Regulation) and maintains a dedicated Data Protection Officer (DPO). We have implemented comprehensive data subject rights processes including data access, rectification, erasure, and portability. Our privacy policy is transparent and regularly updated to reflect regulatory changes.
+
+We also comply with CCPA (California Consumer Privacy Act), SOC 2 Type II requirements, and ISO 27001 standards. Annual compliance audits are conducted by independent third-party assessors.
+
+Security Certifications:
+- ISO 27001:2013 Information Security Management (renewed annually)
+- SOC 2 Type II (audited annually)
+- PCI DSS Level 1 Service Provider
+- HIPAA compliance for healthcare clients
+- FedRAMP Moderate Authorization (in progress)
+
+Data Retention and Deletion:
+Our data retention policy specifies that customer operational data is retained for the duration of the service agreement plus 90 days. Backup data is retained for 12 months. Upon customer request or contract termination, all data is securely deleted within 30 days using DoD 5220.22-M standards.
+
+Customers can request data deletion at any time through our customer portal. We provide a certificate of destruction upon completion of the deletion process.
+
+Employee Security Training:
+All employees complete mandatory security awareness training during onboarding and annually thereafter. Training covers topics including phishing awareness, password security, data handling, social engineering, and incident reporting.
+
+Developers receive additional secure coding training and participate in quarterly security workshops. Our security team conducts simulated phishing exercises monthly to test employee awareness. Employees with access to customer data undergo background checks and sign confidentiality agreements.
+
+Penetration Testing:
+ShieldGuard conducts quarterly penetration testing performed by independent security firms. We also run continuous automated vulnerability scans on all production systems. Any critical or high-severity findings are remediated within 48 hours. Medium-severity issues are addressed within 30 days.
+
+We participate in a responsible disclosure program and maintain a bug bounty program through HackerOne. All findings are tracked in our vulnerability management system until resolution.

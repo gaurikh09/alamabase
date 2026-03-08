@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block extra_css %}
+<style>
+    .question-card { background: white; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid #667eea; transition: all 0.3s; }
+    .question-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .question-text { font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem; color: #2c3e50; }
+    .answer-text { margin-bottom: 1rem; line-height: 1.8; color: #495057; }
+    .citations { background: #f8f9fa; padding: 1rem; border-radius: 12px; margin: 1rem 0; }
+    .citations ul { margin: 0.5rem 0 0 1.5rem; }
+    .citations li { margin-bottom: 0.5rem; color: #6c757d; }
+    .confidence { display: inline-block; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+    .confidence-high { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
+    .confidence-medium { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+    .confidence-low { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+    .coverage-summary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 16px; margin-bottom: 2rem; }
+    .coverage-stats { display: flex; gap: 3rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 3rem; font-weight: 700; }
+    .stat-label { opacity: 0.9; margin-top: 0.5rem; font-size: 0.95rem; }
+    textarea { min-height: 120px; width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 12px; font-size: 1rem; }
+</style>
+{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h2 style="font-size: 2.5rem; color: #2c3e50; font-weight: 700;">{{ questionnaire.title }}</h2>
+    <div>
+        <a href="{% url 'export_questionnaire' questionnaire.pk %}" class="btn btn-success">📥 Export</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">← Back</a>
+    </div>
+</div>
+
+<div class="coverage-summary">
+    <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Coverage Summary</h3>
+    <div class="coverage-stats">
+        <div class="stat">
+            <div class="stat-value">{{ coverage.total }}</div>
+            <div class="stat-label">Total Questions</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">{{ coverage.answered }}</div>
+            <div class="stat-label">✓ Answered</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">{{ coverage.not_found }}</div>
+            <div class="stat-label">⚠ Not Found</div>
+        </div>
+    </div>
+</div>
+
+{% if not questions.0.answer %}
+<div class="card" style="text-align: center; padding: 3rem;">
+    <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #6c757d;">Questions extracted. Generate AI-powered answers using your reference documents.</p>
+    <a href="{% url 'generate_answers' questionnaire.pk %}" class="btn btn-success" style="font-size: 1.1rem; padding: 1rem 3rem;">🚀 Generate Answers</a>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+    <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #495057;">Want to regenerate all answers with updated AI?</p>
+    <a href="{% url 'generate_answers' questionnaire.pk %}" class="btn" style="padding: 0.75rem 2rem;">🔄 Regenerate All</a>
+</div>
+{% endif %}
+
+{% for question in questions %}
+<div class="question-card">
+    <div class="question-text">Q{{ question.order }}. {{ question.text }}</div>
+    
+    {% if question.answer %}
+    <div class="answer-text" id="answer-text-{{ question.answer.pk }}">
+        <strong style="color: #667eea;">Answer:</strong> {{ question.answer.text }}
+    </div>
+    
+    <textarea id="answer-edit-{{ question.answer.pk }}" style="display: none;">{{ question.answer.text }}</textarea>
+    
+    {% if question.answer.citations %}
+    <div class="citations">
+        <strong style="color: #2c3e50;">📚 Citations:</strong>
+        <ul>
+            {% for citation in question.answer.get_citations_list %}
+            <li>{{ citation }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div style="margin: 1.5rem 0;">
+        {% if question.answer.confidence >= 0.7 %}
+        <span class="confidence confidence-high">✓ Confidence: {% widthratio question.answer.confidence 1 100 %}%</span>
+        {% elif question.answer.confidence >= 0.4 %}
+        <span class="confidence confidence-medium">⚠ Confidence: {% widthratio question.answer.confidence 1 100 %}%</span>
+        {% else %}
+        <span class="confidence confidence-low">⚠ Confidence: {% widthratio question.answer.confidence 1 100 %}%</span>
+        {% endif %}
+        {% if question.answer.edited %}
+        <span class="badge badge-primary" style="margin-left: 1rem;">✏️ Edited</span>
+        {% endif %}
+    </div>
+    
+    <div style="margin-top: 1.5rem;">
+        <button onclick="editAnswer({{ question.answer.pk }})" id="edit-btn-{{ question.answer.pk }}" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">✏️ Edit</button>
+        <button onclick="saveAnswer({{ question.answer.pk }})" id="save-btn-{{ question.answer.pk }}" class="btn btn-success" style="padding: 0.75rem 1.5rem; display: none;">💾 Save</button>
+        <button onclick="cancelEdit({{ question.answer.pk }})" id="cancel-btn-{{ question.answer.pk }}" class="btn btn-secondary" style="padding: 0.75rem 1.5rem; display: none;">✕ Cancel</button>
+        <button onclick="regenerateAnswer({{ question.pk }})" class="btn" style="padding: 0.75rem 1.5rem; margin-left: 0.5rem;">🔄 Regenerate</button>
+    </div>
+    {% else %}
+    <div class="answer-text" style="color: #6c757d; font-style: italic;">Answer not generated yet.</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}
+{% block extra_js %}
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function editAnswer(answerId) {
+    document.getElementById('answer-text-' + answerId).style.display = 'none';
+    document.getElementById('answer-edit-' + answerId).style.display = 'block';
+    document.getElementById('edit-btn-' + answerId).style.display = 'none';
+    document.getElementById('save-btn-' + answerId).style.display = 'inline-block';
+    document.getElementById('cancel-btn-' + answerId).style.display = 'inline-block';
+}
+function cancelEdit(answerId) {
+    document.getElementById('answer-text-' + answerId).style.display = 'block';
+    document.getElementById('answer-edit-' + answerId).style.display = 'none';
+    document.getElementById('edit-btn-' + answerId).style.display = 'inline-block';
+    document.getElementById('save-btn-' + answerId).style.display = 'none';
+    document.getElementById('cancel-btn-' + answerId).style.display = 'none';
+}
+function saveAnswer(answerId) {
+    const text = document.getElementById('answer-edit-' + answerId).value;
+    fetch('/answer/' + answerId + '/update/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': getCookie('csrftoken')},
+        body: 'text=' + encodeURIComponent(text)
+    }).then(response => response.json()).then(data => {
+        if (data.success) {
+            document.getElementById('answer-text-' + answerId).innerHTML = '<strong style="color: #667eea;">Answer:</strong> ' + text;
+            cancelEdit(answerId);
+            location.reload();
+        }
+    });
+}
+function regenerateAnswer(questionId) {
+    if (!confirm('Regenerate this answer?')) return;
+    fetch('/question/' + questionId + '/regenerate/', {
+        method: 'POST',
+        headers: {'X-CSRFToken': getCookie('csrftoken')}
+    }).then(response => response.json()).then(data => {
+        if (data.success) location.reload();
+    });
+}
+</script>
+{% endblock %}
