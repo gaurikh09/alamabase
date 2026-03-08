@@ -1,42 +1,63 @@
 {% extends 'base.html' %}
 {% block page_title %}Upload Reference{% endblock %}
+{% block extra_css %}
+<style>
+    .upload-area {
+        border: 2px dashed rgba(236, 72, 153, 0.3);
+        border-radius: 16px;
+        padding: 48px 32px;
+        text-align: center;
+        transition: all 0.3s;
+        background: #111827;
+        cursor: pointer;
+    }
+    .upload-area:hover {
+        border-color: #EC4899;
+        background: rgba(236, 72, 153, 0.05);
+    }
+    .upload-area.dragover {
+        border-color: #EC4899;
+        background: rgba(236, 72, 153, 0.1);
+    }
+</style>
+{% endblock %}
 {% block content %}
 <div class="card" style="max-width: 700px; margin: 2rem auto;">
-    <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">📚</div>
-        <h2 style="font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Upload Reference Document</h2>
-        <p style="color: #64748b;">Add documentation to power AI-generated answers</p>
+    <div style="text-align: center; margin-bottom: 32px;">
+        <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: linear-gradient(135deg, #EC4899 0%, #A855F7 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">📚</div>
+        <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 8px;">Upload Reference Document</h2>
+        <p style="color: #CBD5E1;">Add documentation to power AI-generated answers</p>
     </div>
     
     <form method="post" enctype="multipart/form-data" id="uploadForm">
         {% csrf_token %}
         <div class="form-group">
-            <label><i class="fas fa-heading" style="margin-right: 0.5rem;"></i>Title</label>
+            <label><i class="fas fa-heading" style="margin-right: 8px;"></i>Title</label>
             <input type="text" name="title" placeholder="e.g., Security Policy 2024" required>
         </div>
         
         <div class="form-group">
-            <label><i class="fas fa-file" style="margin-right: 0.5rem;"></i>File</label>
+            <label><i class="fas fa-file" style="margin-right: 8px;"></i>File</label>
             <div class="upload-area" id="uploadArea">
                 <input type="file" name="file" id="fileInput" accept=".pdf,.docx,.txt,.xlsx" required style="display: none;">
                 <div id="uploadPrompt">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; color: #cbd5e1;">📁</div>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: #475569; margin-bottom: 0.5rem;">Drop your file here or click to browse</p>
-                    <p style="font-size: 0.9rem; color: #94a3b8;">Supports PDF, DOCX, TXT, XLSX</p>
+                    <div style="font-size: 3rem; margin-bottom: 16px; color: #EC4899;">📁</div>
+                    <p style="font-size: 1.1rem; font-weight: 600; color: #F9FAFB; margin-bottom: 8px;">Drop your file here or click to browse</p>
+                    <p style="font-size: 0.9rem; color: #94A3B8;">Supports PDF, DOCX, TXT, XLSX</p>
                 </div>
                 <div id="fileInfo" style="display: none;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: #10b981;" id="fileName"></p>
-                    <p style="font-size: 0.9rem; color: #64748b;" id="fileSize"></p>
+                    <div style="font-size: 3rem; margin-bottom: 16px;">✅</div>
+                    <p style="font-size: 1.1rem; font-weight: 600; color: #EC4899;" id="fileName"></p>
+                    <p style="font-size: 0.9rem; color: #CBD5E1;" id="fileSize"></p>
                 </div>
             </div>
         </div>
         
-        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-            <button type="submit" class="btn btn-success" style="flex: 1; justify-content: center; padding: 1rem;">
+        <div style="display: flex; gap: 16px; margin-top: 32px;">
+            <button type="submit" class="btn" style="flex: 1; justify-content: center; padding: 14px;">
                 <i class="fas fa-upload"></i> Upload Reference
             </button>
-            <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="padding: 1rem 1.5rem;">
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="padding: 14px 24px;">
                 <i class="fas fa-times"></i> Cancel
             </a>
         </div>
